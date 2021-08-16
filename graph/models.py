@@ -27,8 +27,8 @@ class Graph(models.Model):
         g.add_nodes_from(d.keys())
         for k, v in d.items():
             g.add_edges_from(([(k, t) for t in v]))
-        pos = graphviz_layout(g)
-        nx.draw(g, pos, with_labels=True)
+        #pos = graphviz_layout(g)
+        nx.draw(g, with_labels=True)
         f = BytesIO()
         plt.savefig(f)
         content_file = ContentFile(f.getvalue())
