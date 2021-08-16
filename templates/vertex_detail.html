@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div> <a href="{% url 'detail_graph' vertex.graph.pk %}" class="btn btn-dark"> back to graph </a> </div>
+<h2>Vertex Detail</h2>
+<div> VID: {{ vertex.VID }} </div>
+<div> Name: {{ vertex.name }} </div>
+<div> Description: {{ vertex.description }} </div>
+
+<h2> Links </h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th style="width: 40%" colspan=5> Incoming Edge </th>
+            <th style="width: 20%" rowspan=2> Current Vertex </th>
+            <th style="width: 40%" colspan=5> Outgoing Edge </th>
+        </tr>
+        <tr>
+            <th> VID </th>
+            <th> Name </th>
+            <th> Detail </th>
+            <th> Edge </th>
+            <th> Delete </th>
+            <th> Delete </th>
+            <th> Edge </th>
+            <th> Detail </th>
+            <th> VID </th>
+            <th> Name </th>
+        </tr>
+        <tr>
+            <th> - </th>
+            <th> - </th>
+            <th><a href="{% url 'create_incoming' vertex.pk %}" class="btn btn-primary"> Add incoming edge </a>
+                <a href="{% url 'create_incoming_new' vertex.pk %}" class="btn btn-primary"> Add incoming edge with new vertex </a></th>
+            <th> - </th>
+            <th> - </th>
+            <th> - </th>
+            <th> - </th>
+            <th><a href="{% url 'create_outcoming' vertex.pk %}" class="btn btn-primary"> Add outcoming edge </a>
+                <a href="{% url 'create_outcoming_new' vertex.pk %}" class="btn btn-primary"> Add outcoming edge with new vertex </a></th>
+            <th> - </th>
+            <th> - </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for inedge, outedge in edges %}
+        <tr>
+            {% if inedge is None %}
+            <td></td><td></td><td></td><td></td><td></td>
+            {% else %}
+            <td> {{ inedge.source.VID }} </td>
+            <td> {{ inedge.source.name }} </td>
+            <td> <a href="{% url 'detail_vertex' inedge.source.pk %}" class="btn btn-info"> Vertex Detail </a> </td>
+            <td> {{ inedge.description }} </td>
+            <td> <a href="{% url 'delete_incoming' inedge.pk %}" class="btn btn-warning"> x </a> </td>
+            {% endif %}
+            <td></td>
+            {% if outedge is None %}
+            <td></td><td></td><td></td><td></td><td></td>
+            {% else %}
+            <td> x </td>
+            <td> <a href="{% url 'detail_vertex' outedge.target.pk %}" class="btn btn-info"> Vertex Detail </a> </td>
+            <td> {{ outedge.description }} </td>
+            <td> {{ outedge.target.VID }} </td>
+            <td> {{ outedge.target.name }} </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

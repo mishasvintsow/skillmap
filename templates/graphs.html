@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Graph List</h2>
+<div> <a href="{% url 'create_graph' %}" class="btn btn-primary"> Add </a> </div> 
+{% for graph in graphs %}
+<div class="container">
+    <div> Name: {{ graph.name }} </div>
+    <div> Description: {{ graph.description }} </div>
+    <div> <a href="{% url 'detail_graph' graph.pk %}" class="btn btn-info"> Graph Detail </a> </div>
+</div>
+{% endfor %}
+{% endblock %}

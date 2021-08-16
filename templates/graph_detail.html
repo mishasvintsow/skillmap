@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Graph Detail</h2>
+<div> 
+    <a href="{% url 'add_vertex' graph.pk %}" class="btn btn-primary"> Add Vertex </a> 
+    <a href="{% url 'add_edge' graph.pk %}" class="btn btn-primary"> Add Edge </a> 
+</div>
+{% if graph.image %}
+<img src="{{ graph.image.url }}">
+{% else %}
+Граф пустой. Невозможно отобразить
+{% endif %}
+<h2> Vertexes List </h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col"> VID </th>
+            <th scope="col"> Name </th>
+            <th scope="col"> Description </th>
+            <th scope="col"> </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for vertex in graph.vertex_set.all %}
+        <tr>
+            <td> {{ vertex.VID }} </td>
+            <td> {{ vertex.name }} </td>
+            <td> {{ vertex.description }} </td>
+            <td> <a href="{% url 'detail_vertex' vertex.pk %}" class="btn btn-info"> Vertex Detail </a> </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2> Edges List </h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col"> Source </th>
+            <th scope="col"> Edge </th>
+            <th scope="col"> Target </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for edge in edges %}
+        <tr>
+            <td> {{ edge.source }} </td>
+            <td> {{ edge.description }} </td>
+            <td> {{ edge.target }} </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
