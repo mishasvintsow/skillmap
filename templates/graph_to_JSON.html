@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h2>Graph. JSON</h2>
+<div> <a href="{% url 'detail_graph' graph.pk %}" class="btn btn-dark"> back to graph </a> </div>
+
+<div class="container"> {{ graph_json }} </div>
+{% endblock %}

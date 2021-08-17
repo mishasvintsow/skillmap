@@ -1,5 +1,5 @@
 from django.db import models
-from django.forms import ModelForm, CharField, Textarea
+from django.forms import ModelForm, CharField, Textarea, Form
 import networkx as nx
 from django.apps import apps
 import matplotlib.pyplot as plt
@@ -27,7 +27,8 @@ class Graph(models.Model):
         g.add_nodes_from(d.keys())
         for k, v in d.items():
             g.add_edges_from(([(k, t) for t in v]))
-        #pos = graphviz_layout(g)
+#        pos = graphviz_layout(g, prog = 'fdp', root = 10)
+        plt.figure(figsize=(10, 10))
         nx.draw_kamada_kawai(g, with_labels=True)
         f = BytesIO()
         plt.savefig(f)
@@ -46,11 +47,12 @@ class Vertex(models.Model):
     description = models.TextField(null = True, blank = True)
     
     def __str__(self):
-        return str(self.graph) + ': ' + str(self.VID) + ', ' + str(self.name)
+        return str(self.VID) + ', ' + str(self.name)
     
 class Edge(models.Model):
     class Meta:
         ordering = ['source__VID', 'target__VID']
+        
     source = models.ForeignKey(Vertex, on_delete = models.CASCADE, related_name = 'outcoming_edges')
     target = models.ForeignKey(Vertex, on_delete = models.CASCADE, related_name = 'incoming_edges')
     description = models.TextField(null = True, blank = True)
@@ -71,10 +73,16 @@ class AddEdgeVertexForm(ModelForm):
         fields = ['graph', 'VID', 'name', 'description']
     edge_description = CharField(label = 'Edge description', widget=Textarea, required=False)
 
-@receiver(post_save, sender=Vertex)
-@receiver(post_save, sender=Edge)
-def my_handler(sender, instance, **kwargs):
-    graph = instance.graph if sender is Vertex else instance.source.graph
-    if graph.image:
-        graph.image.delete()
-    graph.create_image()
+#@receiver(post_save, sender=Vertex)
+#@receiver(post_save, sender=Edge)
+#def my_handler(sender, instance, **kwargs):
+#    graph = instance.graph if sender is Vertex else instance.source.graph
+#    if graph.image:
+#        graph.image.delete()
+#    graph.create_image()
+
+class GraphFromJSONForm(Form):
+     text = CharField(label = 'JSON', widget=Textarea)
+        
+class TopSortForm(Form):
+     new_name = CharField(label = 'New name for sorted graph')

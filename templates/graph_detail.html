@@ -5,6 +5,9 @@
 <div> 
     <a href="{% url 'add_vertex' graph.pk %}" class="btn btn-primary"> Add Vertex </a> 
     <a href="{% url 'add_edge' graph.pk %}" class="btn btn-primary"> Add Edge </a> 
+    <a href="{% url 'graph_to_json' graph.pk %}" class="btn btn-info"> JSON </a> 
+    <a href="{% url 'graph_topsort' graph.pk %}" class="btn btn-info"> TopSort </a> 
+    <a href="{% url 'graph_add_nullpoint' graph.pk %}" class="btn btn-info"> Add null-point </a> 
 </div>
 {% if graph.image %}
 <img src="{{ graph.image.url }}">
