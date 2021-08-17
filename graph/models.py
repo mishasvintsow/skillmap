@@ -28,10 +28,11 @@ class Graph(models.Model):
         for k, v in d.items():
             g.add_edges_from(([(k, t) for t in v]))
         #pos = graphviz_layout(g)
-        nx.draw(g, with_labels=True)
+        nx.draw_kamada_kawai(g, with_labels=True)
         f = BytesIO()
         plt.savefig(f)
         content_file = ContentFile(f.getvalue())
+        self.image.delete()
         self.image.save(self.name+".png", content_file)
         plt.figure()
 

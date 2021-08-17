@@ -28,8 +28,7 @@ class GraphDetailView(DetailView):
     context_object_name = 'graph'
     
     def get_context_data(self, **kwargs):
-        if not self.get_object().image:
-            self.get_object().create_image()
+        self.get_object().create_image()
         context = super().get_context_data(**kwargs)
         context['edges'] = Edge.objects.filter(source__graph = self.get_object())
         return context
