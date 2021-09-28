@@ -2,3 +2,4 @@ media/*
 *checkpoints*
 *pycache*
 skillmap/settings.py
+.idea/
