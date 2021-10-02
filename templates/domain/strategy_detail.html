@@ -3,23 +3,27 @@
 
 
 {% block content %}
-<div class="container">
-    <table class="table table-borderless">
-        <tbody>
+    <a href="{% url 'strategy_update' strategy.skill_goal.domain.code strategy.skill_goal.code strategy.code %}"
+       class="btn btn-primary"> Update </a>
+    <div class="container">
+        <table class="table table-borderless">
+            <tbody>
             <tr>
-                <th class="col-2"> domain </th>
-                <td class="col-10"> <a href="{% url 'domain_detail' strategy.skill_goal.domain.code %}" class="btn btn-primary"> {{ strategy.skill_goal.domain }} </a></td>
+                <th class="col-2"> domain</th>
+                <td class="col-10"><a href="{% url 'domain_detail' strategy.skill_goal.domain.code %}"
+                                      class="btn btn-primary"> {{ strategy.skill_goal.domain }} </a></td>
             </tr>
             <tr>
-                <th> skill </th>
-                <td> <a href="{% url 'skill_detail' strategy.skill_goal.domain.code strategy.skill_goal.code %}" class="btn btn-primary"> {{ strategy.skill_goal }} </a></td>
+                <th> skill</th>
+                <td><a href="{% url 'skill_detail' strategy.skill_goal.domain.code strategy.skill_goal.code %}"
+                       class="btn btn-primary"> {{ strategy.skill_goal }} </a></td>
             </tr>
             <tr>
-                <th> code </th>
+                <th> code</th>
                 <td> {{ strategy.code }}</td>
             </tr>
             <tr>
-                <th> name </th>
+                <th> name</th>
                 <td> {{ strategy.name }}</td>
             </tr>
             <tr>
@@ -40,16 +44,19 @@
             <tbody>
 
             {% for action in strategy.action_set.all %}
-                <tr><td> {{ action.order }} </td>
-                <td> {{ action.description }} </td>
-                <td>
-                    {% for prereq in action.prerequisites.all %}
-                        <div class="container mt-2"> <a href="{% url 'strategy_detail' strategy.skill_goal.domain.code strategy.skill_goal.code strategy.code %}" class="btn btn-primary"> {{ strategy }} </a></div>
-                    {% endfor %}
-                </td>
+                <tr>
+                    <td> {{ action.order }} </td>
+                    <td> {{ action.description }} </td>
+                    <td>
+                        {% for prereq in action.prerequisites.all %}
+                            <div class="container mt-2"><a
+                                    href="{% url 'strategy_detail' prereq.skill_goal.domain.code prereq.skill_goal.code prereq.code %}"
+                                    class="btn btn-primary"> {{ prereq }} </a></div>
+                        {% endfor %}
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-</div>
+    </div>
 {% endblock %}

@@ -122,7 +122,7 @@ class StrategyUpdateView(UpdateView):
         return get_object_or_404(Strategy, skill_goal=skill, code=self.kwargs['strategy_code'])
 
     def get_success_url(self, **kwargs):
-        return reverse_lazy("strategy_detail", args=(self.object.skill_goal.domain.code,
+        return reverse_lazy("strategy_update", args=(self.object.skill_goal.domain.code,
                                                      self.object.skill_goal.code,
                                                      self.object.code,))
 

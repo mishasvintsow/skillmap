@@ -3,6 +3,8 @@
 
 
 {% block content %}
+    <a href="{% url 'domain_update' domain.code %}"
+       class="btn btn-primary"> Update </a>
     <a href="{% url 'skill_create' domain.code %}" class="btn btn-primary"> Add Skill </a>
     <div class="container">
         <table class="table table-borderless">
