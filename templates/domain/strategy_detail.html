@@ -8,11 +8,11 @@
         <tbody>
             <tr>
                 <th class="col-2"> domain </th>
-                <td class="col-10"> {{ strategy.skill_goal.domain }}</td>
+                <td class="col-10"> <a href="{% url 'domain_detail' strategy.skill_goal.domain.code %}" class="btn btn-primary"> {{ strategy.skill_goal.domain }} </a></td>
             </tr>
             <tr>
                 <th> skill </th>
-                <td> {{ strategy.skill_goal.code }}</td>
+                <td> <a href="{% url 'skill_detail' strategy.skill_goal.domain.code strategy.skill_goal.code %}" class="btn btn-primary"> {{ strategy.skill_goal }} </a></td>
             </tr>
             <tr>
                 <th> code </th>
@@ -44,7 +44,7 @@
                 <td> {{ action.description }} </td>
                 <td>
                     {% for prereq in action.prerequisites.all %}
-                        <div> {{ prereq }}</div>
+                        <div class="container mt-2"> <a href="{% url 'strategy_detail' strategy.skill_goal.domain.code strategy.skill_goal.code strategy.code %}" class="btn btn-primary"> {{ strategy }} </a></div>
                     {% endfor %}
                 </td>
                 </tr>

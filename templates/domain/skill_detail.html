@@ -9,7 +9,7 @@
             <tbody>
             <tr>
                 <th class="col-2"> domain</th>
-                <td class="col-10"> {{ skill.domain }}</td>
+                <td class="col-10"> <a href="{% url 'domain_detail' skill.domain.code %}" class="btn btn-primary"> {{ domain }} </a></td>
             </tr>
             <tr>
                 <th> code</th>
