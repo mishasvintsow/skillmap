@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    <a href="{% url 'strategy_create' skill.domain.code skill.code %}" class="btn btn-primary"> Add Strategy </a>
+    <div class="container">
+        <table class="table table-borderless">
+            <tbody>
+            <tr>
+                <th class="col-2"> domain</th>
+                <td class="col-10"> {{ skill.domain }}</td>
+            </tr>
+            <tr>
+                <th> code</th>
+                <td> {{ skill.code }}</td>
+            </tr>
+            <tr>
+                <th> name</th>
+                <td> {{ skill.name }}</td>
+            </tr>
+            <tr>
+                <th> description</th>
+                <td> {{ skill.description }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th> code</th>
+                <th> name</th>
+                <th> problem</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for strategy in skill.strategy_set.all %}
+                <tr>
+                    <td>{{ strategy.code }}</td>
+                    <td>{{ strategy.name }}</td>
+                    <td>{{ strategy.description }}</td>
+                    <td><a href="{% url 'strategy_detail' skill.domain.code skill.code strategy.code %}"
+                           class="btn btn-info"> Strategy Detail </a>
+                        <a href="{% url 'strategy_update' skill.domain.code skill.code strategy.code %}"
+                           class="btn btn-info"> Strategy Update </a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+{% endblock %}

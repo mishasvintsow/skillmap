@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<div class="container">
+    <table class="table table-borderless">
+        <tbody>
+            <tr>
+                <th class="col-2"> domain </th>
+                <td class="col-10"> {{ strategy.skill_goal.domain }}</td>
+            </tr>
+            <tr>
+                <th> skill </th>
+                <td> {{ strategy.skill_goal.code }}</td>
+            </tr>
+            <tr>
+                <th> code </th>
+                <td> {{ strategy.code }}</td>
+            </tr>
+            <tr>
+                <th> name </th>
+                <td> {{ strategy.name }}</td>
+            </tr>
+            <tr>
+                <th> problem </th>
+                <td> {{ strategy.problem }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <table class="table table-sm">
+            <thead>
+            <tr>
+                <th> order</th>
+                <th> description</th>
+                <th> prerequisites</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for action in strategy.action_set.all %}
+                <tr><td> {{ action.order }} </td>
+                <td> {{ action.description }} </td>
+                <td>
+                    {% for prereq in action.prerequisites.all %}
+                        <div> {{ prereq }}</div>
+                    {% endfor %}
+                </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+</div>
+{% endblock %}

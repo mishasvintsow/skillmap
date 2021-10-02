@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Domains List</h2>
+    <div><a href="{% url 'domain_create' %}" class="btn btn-primary"> Add </a></div>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th> code</th>
+            <th> name</th>
+            <th> description</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for domain in domains %}
+            <tr>
+                <td>{{ domain.code }}</td>
+                <td>{{ domain.name }}</td>
+                <td>{{ domain.description }}</td>
+                <td><a href="{% url 'domain_detail' domain.code %}" class="btn btn-info"> Domain Detail </a>
+                    <a href="{% url 'domain_update' domain.code %}" class="btn btn-info"> Domain Update </a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+{% endblock %}

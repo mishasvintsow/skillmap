@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h2>Update Strategy</h2>
+    <form method="post">
+        {{ formset.management_form|crispy }}
+        {% csrf_token %}
+        {{ form|crispy }}
+
+        <table class="table table-sm">
+            <thead>
+            <tr>
+                <th> order</th>
+                <th> description</th>
+                <th> prerequisites</th>
+                <th> Удалить?</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for action_form in formset %}
+                {% if action_form.errors %}
+                    <tr>
+                        <td> {% for e in action_form.non_field_errors %} {{ e }} {% endfor %}</td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    {% for field in action_form %}
+                        {% include 'bootstrap/field.html' with tag="td" form_show_labels=False %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-success"> Add</button>
+    </form>
+{% endblock %}

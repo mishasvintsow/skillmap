@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Graph manager</h2>
+    <div><a href="{% url 'graphs' %}" class="btn btn-primary"> Graphs </a></div>
+
+
+    <h2>Domain manager</h2>
+    <div><a href="{% url 'domains' %}" class="btn btn-primary"> Domains </a></div>
+{% endblock %}
