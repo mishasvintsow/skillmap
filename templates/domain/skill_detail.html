@@ -3,6 +3,8 @@
 
 
 {% block content %}
+    <a href="{% url 'domain_detail' skill.domain.code %}"
+       class="btn btn-primary"> Back to domain </a>
     <a href="{% url 'skill_update' skill.domain.code skill.code %}"
        class="btn btn-primary"> Update </a>
     <a href="{% url 'strategy_create' skill.domain.code skill.code %}" class="btn btn-primary"> Add Strategy </a>

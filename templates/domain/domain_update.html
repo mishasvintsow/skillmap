@@ -3,6 +3,8 @@
 
 {% block content %}
 <h2>Update Domain</h2>
+    <a href="{% url 'domain_detail' form.instance.code %}"
+       class="btn btn-primary"> Back to domain </a>
 <form method="post">
     {% csrf_token %}
     {{ form|crispy }}

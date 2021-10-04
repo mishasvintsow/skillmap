@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h2>Update Skill</h2>
+    <a href="{% url 'domain_detail' form.instance.domain.code %}"
+       class="btn btn-primary"> Back to domain </a>
+    <a href="{% url 'skill_detail' form.instance.domain.code form.instance.code %}"
+       class="btn btn-primary"> Back to skill </a>
+<form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-success"> Add </button>
+</form>
+{% endblock %}

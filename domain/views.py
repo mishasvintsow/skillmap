@@ -113,7 +113,7 @@ class StrategyDetailView(DetailView):
 class StrategyUpdateView(UpdateView):
     model = Strategy
     context_object_name = 'strategy'
-    fields = ['name', 'problem']
+    fields = ['skill_goal', 'name', 'problem']
     template_name = 'domain/strategy_actions_update.html'
 
     def get_object(self):

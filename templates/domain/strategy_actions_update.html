@@ -2,6 +2,12 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <h2>Update Strategy</h2>
+    <a href="{% url 'domain_detail' form.instance.skill_goal.domain.code %}"
+       class="btn btn-primary"> Back to domain </a>
+    <a href="{% url 'skill_detail' form.instance.skill_goal.domain.code form.instance.skill_goal.code %}"
+       class="btn btn-primary"> Back to skill </a>
+    <a href="{% url 'strategy_detail' form.instance.skill_goal.domain.code form.instance.skill_goal.code form.instance.code %}"
+       class="btn btn-primary"> Back to strategy </a>
     <form method="post">
         {{ formset.management_form|crispy }}
         {% csrf_token %}
